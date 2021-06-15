@@ -10,7 +10,6 @@ class MyTestCase(unittest.TestCase):
         cls.dr=webdriver.Firefox()
         cls.base_url='https://www.baidu.com'
 
-
     @classmethod
     def tearDownClass(cls):
         cls.dr.quit()

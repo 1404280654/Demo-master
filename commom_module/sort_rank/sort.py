@@ -42,6 +42,8 @@ for a in range(len(alist)-1):
     if a!=mind:
          alist[mind],alist[a]=alist[a],alist[mind]
 print(alist)
+
+
 # 插入排序
 """ 插入排序
     外层只循环数组的长度次，然后内循环先排列好【0-1】第二循环排列好【0-2】第三次循环排列好【0-3】的以此类推"""

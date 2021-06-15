@@ -50,11 +50,14 @@ r = requests.get('http://www.itwhy.org')
 r.status_code #响应状态码
 r.raw #返回原始响应体，也就是 urllib 的 response 对象，使用 r.raw.read() 读取
 r.content #字节方式的响应体，会自动为你解码 gzip 和 deflate 压缩
+r.encoding = "gb2312"   # 设置编码
 r.text #字符串方式的响应体，会自动根据响应头部的字符编码进行解码
 r.headers #以字典对象存储服务器响应头，但是这个字典比较特殊，字典键不区分大小写，若键不存在则返回None
 #*特殊方法*#
 r.json() #Requests中内置的JSON解码器
 r.raise_for_status() #失败请求(非200响应)抛出异常
+r.cookies['example_cookie_name']
+r.headers.get('content-type')
 '''
 
 '''6.0
@@ -78,5 +81,31 @@ from requests.auth import HTTPBasicAuth
 r = requests.get('https://httpbin.org/hidden-basic-auth/user/passwd', auth=HTTPBasicAuth('user', 'passwd'))
 # r = requests.get('https://httpbin.org/hidden-basic-auth/user/passwd', auth=('user', 'passwd'))    # 简写
 print(r.json())
+
+
+# 我们来跨请求保持一些 cookie:
+s = requests.Session()
+
+s.get('http://httpbin.org/cookies/set/sessioncookie/123456789')
+r = s.get("http://httpbin.org/cookies")
+
+print(r.text)
+# '{"cookies": {"sessioncookie": "123456789"}}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
